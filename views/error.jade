@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    ul
+        li
+            a(href='/') Start
+        li
+            a(href='/om-os') Om Os
+        li
+            a(href='/api/beers') Alle Øl
+    div.content
+        h1= message
+        h2= error.status
+        pre #{error.stack}

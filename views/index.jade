@@ -1,0 +1,64 @@
+extends layout
+
+block content
+    ul
+        li
+            a.active(href='/') Start
+        li
+            a(href='/om-os') Om Os
+        li
+            a(href='/api/beers') Alle Øl
+    div.content
+        h1= title
+        table
+            tbody
+                tr
+                    th Endpoint
+                    th Request type
+                    th Beskrivelse
+                tr
+                    td /api/beers/
+                    td GET
+                    td Viser 3 øl-objekter
+                tr
+                    td /api/beers/
+                    td POST
+                    td Modtager et øl-objekt og viser det igen
+                tr
+                    td /api/beers/:id
+                    td GET
+                    td Viser øl-objektet med :id (kan være 1, 2 eller 3)
+                tr
+                    td /api/beers/:id
+                    td PUT
+                    td Viser en besked med "Øl id 1 er opdateret!"
+                tr
+                    td /api/beers/:id
+                    td DELETE
+                    td Viser en besked med "Øl id 1 er slettet!"
+        hr
+        h1 API Examples
+        h2 1. Read all beers
+        p HTTP method: GET
+        p URL: http://localhost:3000/api/beers/
+        p Body: Empty
+        h2 2. Create new beer
+        p HTTP method: POST
+        p URL: http://localhost:3000/api/beers/
+        p Body: {"id":Insert id,"name":"Insert name","tagline":"Insert tagline.","first_brewed":"Insert date","description":"Insert description."}
+        // p Body: {"id":4,"name":"Pilsen Lager","tagline":"Unleash the Yeast Series.","first_brewed":"09/2013","description":"Our Unleash the Yeast series was an epic experiment into the differences in aroma and flavour provided by switching up your yeast. We brewed up a wort with a light caramel note and some toasty biscuit flavour, and hopped it with Amarillo and Centennial for a citrusy bitterness. Everything else is down to the yeast. Pilsner yeast ferments with no fruity esters or spicy phenols, although it can add a hint of butterscotch."}
+        h2 3. Read specific beer
+        p HTTP method: GET
+        p URL: http://localhost:3000/api/beers/1
+        p Body: Empty
+        h2 4. Update specific beer
+        p HTTP method: PUT
+        p URL: http://localhost:3000/api/beers/1
+        p Body: {"id":Insert updated id,"name":"Insert updated name","tagline":"Insert updated tagline.","first_brewed":"Insert updated date","description":"Insert updated description."}
+        h2 5. Delete specific beer
+        p HTTP method: DELETE
+        p URL: http://localhost:3000/api/beers/1
+        p Body: Empty
+
+
+
