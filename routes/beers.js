@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 
 const fs = require('fs');
-var createError = require('http-errors');
 
 // Get all beers
 router.get('/', function (req, res, next) {
