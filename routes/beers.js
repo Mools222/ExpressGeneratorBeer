@@ -14,18 +14,14 @@ router.get('/:id', function (req, res, next) {
     let data = fs.readFileSync(__dirname + "/beers.json");
     let dataArray = JSON.parse(data);
 
-    let beerFound = false;
-
     for (let beer of dataArray) {
         if (beer.id === Number(req.params.id)) {
-            res.send(beer);
-            beerFound = true;
-            break;
+            return res.send(beer);
         }
     }
 
-    if (!beerFound)
-        next(); // "next()" is what comes after "app.use('/api/beers', beerRouter);" in app.js
+    // This is only called if no beer with the given id is found
+    next(); // "next()" is what comes after "app.use('/api/beers', beerRouter);" in app.js
 });
 
 // Create beer
@@ -47,22 +43,18 @@ router.put('/:id', (req, res, next) => {
     let filePath = __dirname + "/beers.json";
     let dataArray = JSON.parse(fs.readFileSync(filePath));
 
-    let beerFound = false;
-
     for (let i = 0; i < dataArray.length; i++) {
         let beer = dataArray[i];
 
         if (beer.id === Number(req.params.id)) {
             dataArray[i] = bodyObject;
             fs.writeFileSync(filePath, JSON.stringify(dataArray));
-            res.send(`Øl id ${bodyObject.id} er opdateret!`);
-            beerFound = true;
-            break;
+            return res.send(`Øl id ${bodyObject.id} er opdateret!`);
         }
     }
 
-    if (!beerFound)
-        next(); // "next()" is what comes after "app.use('/api/beers', beerRouter);" in app.js
+    // This is only called if no beer with the given id is found
+    next(); // "next()" is what comes after "app.use('/api/beers', beerRouter);" in app.js
 });
 
 // Delete beer
@@ -70,22 +62,18 @@ router.delete('/:id', (req, res, next) => {
     let filePath = __dirname + "/beers.json";
     let dataArray = JSON.parse(fs.readFileSync(filePath));
 
-    let beerFound = false;
-
     for (let i = 0; i < dataArray.length; i++) {
         let beer = dataArray[i];
 
         if (beer.id === Number(req.params.id)) {
             dataArray.splice(i, 1);
             fs.writeFileSync(filePath, JSON.stringify(dataArray));
-            res.send(`Øl id ${req.url.slice(1)} er slettet!`);
-            beerFound = true;
-            break;
+            return res.send(`Øl id ${req.url.slice(1)} er slettet!`);
         }
     }
 
-    if (!beerFound)
-        next(); // "next()" is what comes after "app.use('/api/beers', beerRouter);" in app.js
+    // This is only called if no beer with the given id is found
+    next(); // "next()" is what comes after "app.use('/api/beers', beerRouter);" in app.js
 });
 
 module.exports = router;
