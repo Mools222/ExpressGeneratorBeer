@@ -26,7 +26,7 @@ router.get('/:id', function (req, res, next) {
     }
 
     if (!beerFound)
-        next(createError(404)); // "next()" is what comes after "app.use('/api/beers', beerRouter);" in app.js
+        next(); // "next()" is what comes after "app.use('/api/beers', beerRouter);" in app.js
 });
 
 // Create beer
@@ -63,7 +63,7 @@ router.put('/:id', (req, res, next) => {
     }
 
     if (!beerFound)
-        next(createError(404)); // "next()" is what comes after "app.use('/api/beers', beerRouter);" in app.js
+        next(); // "next()" is what comes after "app.use('/api/beers', beerRouter);" in app.js
 });
 
 // Delete beer
@@ -86,7 +86,7 @@ router.delete('/:id', (req, res, next) => {
     }
 
     if (!beerFound)
-        next(createError(404)); // "next()" is what comes after "app.use('/api/beers', beerRouter);" in app.js
+        next(); // "next()" is what comes after "app.use('/api/beers', beerRouter);" in app.js
 });
 
 module.exports = router;
