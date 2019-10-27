@@ -11,14 +11,14 @@ router.get('/', function (req, res, next) {
 });
 
 // Get specific beer
-router.get('/*', function (req, res, next) {
+router.get('/:id', function (req, res, next) {
     let data = fs.readFileSync(__dirname + "/beers.json");
     let dataArray = JSON.parse(data);
 
     let beerFound = false;
 
     for (let beer of dataArray) {
-        if (beer.id === Number(req.url.slice(1))) {
+        if (beer.id === Number(req.params.id)) {
             res.send(beer);
             beerFound = true;
             break;
@@ -42,7 +42,7 @@ router.post('/', (req, res, next) => {
 });
 
 // Update beer
-router.put('/*', (req, res, next) => {
+router.put('/:id', (req, res, next) => {
     let bodyObject = req.body;
 
     let filePath = __dirname + "/beers.json";
@@ -53,7 +53,7 @@ router.put('/*', (req, res, next) => {
     for (let i = 0; i < dataArray.length; i++) {
         let beer = dataArray[i];
 
-        if (beer.id === Number(req.url.slice(1))) {
+        if (beer.id === Number(req.params.id)) {
             dataArray[i] = bodyObject;
             fs.writeFileSync(filePath, JSON.stringify(dataArray));
             res.send(`Øl id ${bodyObject.id} er opdateret!`);
@@ -67,7 +67,7 @@ router.put('/*', (req, res, next) => {
 });
 
 // Delete beer
-router.delete('/*', (req, res, next) => {
+router.delete('/:id', (req, res, next) => {
     let filePath = __dirname + "/beers.json";
     let dataArray = JSON.parse(fs.readFileSync(filePath));
 
@@ -76,7 +76,7 @@ router.delete('/*', (req, res, next) => {
     for (let i = 0; i < dataArray.length; i++) {
         let beer = dataArray[i];
 
-        if (beer.id === Number(req.url.slice(1))) {
+        if (beer.id === Number(req.params.id)) {
             dataArray.splice(i, 1);
             fs.writeFileSync(filePath, JSON.stringify(dataArray));
             res.send(`Øl id ${req.url.slice(1)} er slettet!`);
