@@ -49,7 +49,7 @@ router.put('/:id', (req, res, next) => {
         if (beer.id === Number(req.params.id)) {
             dataArray[i] = bodyObject;
             fs.writeFileSync(filePath, JSON.stringify(dataArray));
-            return res.send(`Øl id ${bodyObject.id} er opdateret!`);
+            return res.send(`Øl id ${bodyObject.id} er opdateret!`); // POSSIBLE PROBLEM: If the ID is changed to one that already exists - It's probably best not to allow changing the ID
         }
     }
 
@@ -68,7 +68,7 @@ router.delete('/:id', (req, res, next) => {
         if (beer.id === Number(req.params.id)) {
             dataArray.splice(i, 1);
             fs.writeFileSync(filePath, JSON.stringify(dataArray));
-            return res.send(`Øl id ${req.url.slice(1)} er slettet!`);
+            return res.send(`Øl id ${req.params.id} er slettet!`);
         }
     }
 
